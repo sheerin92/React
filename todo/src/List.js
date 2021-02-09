@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import history from './history';
+
 export default class List extends Component {
     constructor(props) {
         super(props);
         this.state = {
             todoItems: this.props.todoItems,
-            activatedTodo : this.props.activatedTodo
+            activatedTodo: this.props.activatedTodo
         }
     }
     toggleTodo = (todo) => this.setState({
@@ -25,23 +27,24 @@ export default class List extends Component {
     );
     deleteTodo(e, item) {
         let todosStr = localStorage.getItem("todos");
-        let todos = JSON.parse(todosStr); 
+        let todos = JSON.parse(todosStr);
         let foundTodo = todos.find(todo => todo.id == item.id);
         let index = todos.indexOf(foundTodo);
         todos.splice(index, 1);
         this.setState({ todoItems: todos });
-        localStorage.setItem('todos',  JSON.stringify(todos));
+        localStorage.setItem('todos', JSON.stringify(todos));
     }
 
-    editTodo(e,item) {
+    editTodo(e, item) {
         let todosStr = localStorage.getItem("todos");
-        let todos = JSON.parse(todosStr); 
+        let todos = JSON.parse(todosStr);
         var foundTodo = todos.find(todo => todo.id == item.id);
         let index = todos.indexOf(foundTodo);
         var todoToBeEdited = todos[index];
-    
-        this.setState({activatedTodo : todoToBeEdited });
-            localStorage.setItem('activatedTodo', JSON.stringify(todoToBeEdited));
+
+        this.setState({ activatedTodo: todoToBeEdited });
+        localStorage.setItem('activatedTodo', JSON.stringify(todoToBeEdited));
+        history.push('/Create');
     }
     componentDidMount = () => {
         let data = localStorage.getItem("todos");

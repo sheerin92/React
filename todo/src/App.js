@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import Create from './Create';
 import List from './List';
 import Home from './Home';
+import history from './history';
 import {
-    BrowserRouter as Router,
+    Router,
     Switch,
     Route,
     Link
 } from "react-router-dom";
+
 
 export default class App extends Component {
     constructor(props) {
@@ -23,7 +25,7 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                <Router>
+                <Router history={history}>
                     <div>
                         <nav className="navbar navbar-expand-lg navbar-dark justify-content-between" style={{ backgroundColor: "#4d5099" }}>
                             <a className="navbar-brand" href="#">TODO</a>
